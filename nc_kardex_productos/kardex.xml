@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+ 
+<!--  
+    <record id="view_kardex_add_user_form" model="ir.ui.view">
+        <field name="name">kardex.user.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">                  
+            <xpath expr="//notebook" position="inside">
+                <page string="Kardex Configuration">
+                     <group>
+                     <field name="usuarios_restr"/> 
+                      
+                    </group>
+                    <group>
+                     <field name="hide_menu_report_kardex" /> 
+                    </group>
+                    <group>
+                     <field name="encabezado_reporte" /> 
+                    </group> 
+                </page>
+            </xpath>
+        </field>
+   </record>     -->
+
+  
+   <record id="view_kardex_productos_mov_form" model="ir.ui.view">
+        <field name="name">kardex.productos.mov.form</field>
+        <field name="model">kardex.productos.mov</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                 <group name="filters">
+                    <group string='General Data' style="width:500px;" >
+                       
+
+                        <field name="select_product" widget='radio'/>
+                     
+                       <field name="product" invisible="select_product == 'todas'"/>
+                       <field name="grupo_producto" widget="many2many_tags" invisible="select_product == 'products'"/>
+                        
+                        <field name="company"  />
+                        <field name="aplica" widget='radio'/>
+                        <!-- <field name="grupo_location" widget="many2many_tags" attrs="{'invisible': [('aplica', '=', 'ubicacion')]}" style="width:600px;"/> -->
+                       <field name="ubicacion" invisible="aplica == 'todas'"/>
+                         
+                             <!-- <field name="company" attrs="{'invisible': [('aplica', '=', 'todas')]}"/> -->
+                        <field name="date_from" />
+                        <field name="date_to" />
+                          <!-- <field name="revisio"/>   -->
+                        
+                         
+                            
+                    </group>
+                   
+                        <group string='Excel'  >                     
+                      
+                        <field name="file_name" invisible="1"/>	                	
+                         <field name="excel_binary" readonly="1"  filename="file_name"/>
+                       </group>
+
+
+                      <group string='Initial Data'  style="width:300px;">                     
+                      
+                       <field name="cantidad_inicial" />
+                       <field name="costo_promedio_inicial"/>
+                       <field name="costo_total_inicial"/>                 
+                    
+                        
+                       </group>
+                       <group string='Data Final'  style="width:300px;" >                   
+                      
+                     
+                        <field name="cantidad_final" />
+                        <field name="costo_promedio"/>
+                        <field name="costo_total"/>
+                    
+                        <field name="currency_id"/>
+                        
+                   
+                        
+                         </group>
+                    
+                    
+                </group>
+              
+                    <button name="buscar_producto" string="Search" type="object" default_focus="1" class="oe_highlight"/>
+                   
+               <notebook>
+                        <page string="Pagina del Kardex" >
+                            <!-- <field name="obj_kardex"  readonly="1" attrs="{'invisible': [('select_product', '=', 'todas')]}"> -->
+                            <field name="obj_kardex" readonly="1" invisible="select_product == 'todas'">
+                                <list  string="Kardex Line" editable="bottom" >
+                                    <field name="date"/> 
+                                    <field name="date_cre" style="width:600px;"/> 
+                                    <field name="usuario"/>
+                                    <field name="location_name"/>
+                                    <field name="concepto"/>                                    
+                                    <field name="u_entrada"/>
+                                    <field name="u_salida"/>
+                                    <field name="u_saldo"/>
+                                    <field name="costo_unit"  />
+                                    <field name="v_entrada"/>
+                                    <field name="v_salida"/>
+                                    <field name="v_saldo"/>
+                                    <!-- <field name="costo_prom"/> -->
+                                    <!-- <field name="state"/> -->
+                                    <field name="origin"/>                                    
+                                    <field name="picking_id"/>                                  
+                                    <field name="account_invoice"/>
+                                    <field name="inventario"/>
+                                    <field name="fact_supplier"/>
+                                    <field name="custumer_supplier"/>
+
+                                </list >
+                            </field>
+                            
+                        </page>
+
+                       
+                    </notebook>
+
+
+
+
+            </form>
+        </field>
+    </record>
+
+     <record id="action_kardex_productos_mov_list_view" model="ir.ui.view">
+            <field name="name">kardex.productos.mov.list</field>
+            <field name="model">kardex.productos.mov</field>           
+            <field name="arch" type="xml">
+                <list>
+                    
+					<field name="product"/>
+                    
+							
+                 </list>
+            </field>
+   </record>
+
+
+   
+
+	
+    <record id="action_kardex_productos_mov" model="ir.actions.act_window">
+        <field name="name">KARDEX - MOVE FOR PRODUCT -ADMIN</field>
+        <field name="type">ir.actions.act_window</field> 
+        <field name="res_model">kardex.productos.mov</field>
+        <field name="view_mode">list,form</field>
+        
+    </record>
+
+
+
+
+
+ 
+
+   <menuitem name="InventoryReportNica"  id="menu_kardex_productos_mov"
+       parent="stock.menu_stock_root"/>  
+
+    <menuitem name="Kardex Inventory Products - Admin"  action="action_kardex_productos_mov" 
+    id="menu_Kardex"   parent="menu_kardex_productos_mov" />
+
+    
+   
+</odoo>

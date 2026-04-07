@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+kardex_model_access_right_user,access.kardex.products.mov.user,model_kardex_productos_mov,base.group_user,1,1,1,1
+kardex_line_model_access_right_user,kardex_line_model_access_right,model_kardex_productos_mov_detalle,base.group_user,1,1,1,1
+kardex2_model_access_right_user,access.kardex.productos.mov2.user,model_kardex_productos_mov2,base.group_user,1,1,1,1
+kardex_line2_model_access_right_user,kardex_line2_model_access_right,model_kardex_productos_mov_detalle2,base.group_user,1,1,1,1
